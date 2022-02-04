@@ -1,0 +1,9 @@
+<resources>
+    <string name="app_name">IteaRecyclerViewLesson</string>
+    <string name="general_text">General texty</string>
+    <string name="name">Name</string>
+    <string name="surname">Surname</string>
+    <string name="title">Title</string>
+
+
+</resources>
