@@ -6,6 +6,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 
@@ -15,7 +16,7 @@ import com.example.itearecyclerviewlesson.adapters.ContactsRecyclerAdapter;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity implements ContactsRecyclerAdapter.onContactListener{
+public class MainActivity extends AppCompatActivity implements ContactsRecyclerAdapter.OnContactListener {
 
     private static final int NUMBER_OF_CONTACTS = 100;
 
@@ -51,20 +52,18 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
         mRecyclerView.setLayoutManager(linearLayoutManager);
         VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(10);
         mRecyclerView.addItemDecoration(itemDecorator);
-        mContactsRecyclerAdapter = new ContactsRecyclerAdapter(mContacts,);
+        mContactsRecyclerAdapter = new ContactsRecyclerAdapter(mContacts,this);
         mRecyclerView.setAdapter(mContactsRecyclerAdapter);
 
 
     }
 
 
-
     @Override
     public void onContactClick(int position) {
-        //mContacts.get(position);
-        //Intent intent = new Intent(this. ContactActivity.java);
-        //startActivity(intent);
 
-        Log.d(TAG,"onContactClick: clicked"+position);
+        Log.d(TAG, "onContactClick: clicked. ");
+        //Intent intent = new Intent(this, ContactItem.java);
+        //startActivity(intent);
     }
 }

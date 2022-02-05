@@ -9,18 +9,17 @@ import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.example.itearecyclerviewlesson.R;
-import com.example.itearecyclerviewlesson.view.MainActivity;
 
 import java.util.ArrayList;
 
 public class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecyclerAdapter.ViewHolder> {
 
     private ArrayList<Contact> mContacts = new ArrayList<>();
-    private OnContactListener monContactListener;
+    private OnContactListener onContactListener;
 
     public ContactsRecyclerAdapter(ArrayList<Contact> mContacts, OnContactListener monContactListener) {
         this.mContacts = mContacts;
-        this.monContactListener = monContactListener;
+        this.onContactListener = monContactListener;
     }
 
     //constructor
@@ -33,7 +32,7 @@ public class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecycl
     @Override
     public ContactsRecyclerAdapter.ViewHolder onCreateViewHolder(@NonNull ViewGroup viewGroup, int viewType) {
         View view = LayoutInflater.from(viewGroup.getContext()).inflate(R.layout.layout_contact_list_item, viewGroup,false);
-        return new ViewHolder(view,monContactListener);
+        return new ViewHolder(view,onContactListener);
     }
 
 
@@ -79,12 +78,14 @@ public class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecycl
 
             onContactListener.onContactClick(getAdapterPosition());
         }
+
+
+
     }
 
     //interface for detecting and interpret the click
-    public interface onContactListener {
-        void onContactClick(int position);
+    public interface OnContactListener {
+        void onContactClick (int position);
     }
-
 
 }

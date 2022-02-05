@@ -10,6 +10,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.IteaRecyclerViewLesson">
         <activity
+            android:name=".view.ContactItem"
+            android:exported="false" />
+        <activity
             android:name=".view.MainActivity"
             android:exported="true">
             <intent-filter>
