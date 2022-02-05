@@ -3,6 +3,7 @@ package com.example.itearecyclerviewlesson.adapters;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
@@ -42,6 +43,7 @@ public class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecycl
         viewHolder.title.setText(mContacts.get(position).getTitle());
         viewHolder.name.setText(mContacts.get(position).getName());
         viewHolder.surname.setText(mContacts.get(position).getSurname());
+        viewHolder.profilePhoto.setImageResource(mContacts.get(position).getPhoto());
 
         //horrible and wrong practice to attack clicklistener here - not good performance at all
 
@@ -58,12 +60,15 @@ public class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecycl
 
         TextView title, name, surname;
         OnContactListener onContactListener;
+        ImageView profilePhoto;
 
         public ViewHolder(@NonNull View itemView, OnContactListener onContactListener) {
             super(itemView);
             title = itemView.findViewById(R.id.tv_title);
             name = itemView.findViewById(R.id.tv_name);
             surname = itemView.findViewById(R.id.tv_surname);
+            profilePhoto=itemView.findViewById(R.id.iv_profilePhoto);
+
             //setting this onContectListener
             this.onContactListener= onContactListener;
 
