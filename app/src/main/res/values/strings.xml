@@ -4,6 +4,6 @@
     <string name="name">Name</string>
     <string name="surname">Surname</string>
     <string name="title">Title</string>
-
+    <string name="action_settings">action settings</string>
 
 </resources>

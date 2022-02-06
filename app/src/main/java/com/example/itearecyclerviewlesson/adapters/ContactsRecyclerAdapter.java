@@ -1,26 +1,40 @@
 package com.example.itearecyclerviewlesson.adapters;
 
+
+
+import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
-
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
-
+import com.bumptech.glide.Glide;
 import com.example.itearecyclerviewlesson.R;
-
 import java.util.ArrayList;
+
+import jp.wasabeef.blurry.Blurry;
+
 
 public class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecyclerAdapter.ViewHolder> {
 
-    private ArrayList<Contact> mContacts = new ArrayList<>();
+    private ArrayList<Contact> mContacts;
     private OnContactListener onContactListener;
 
-    public ContactsRecyclerAdapter(ArrayList<Contact> mContacts, OnContactListener monContactListener) {
+    private ImageView imageProfile;
+    public Context context;
+
+
+
+    private String imageUrl = "https://cdn.pixabay.com/photo/2017/09/01/00/15/png-2702691_960_720.png";
+
+
+    public ContactsRecyclerAdapter(ArrayList<Contact> mContacts, OnContactListener monContactListener, Context context) {
         this.mContacts = mContacts;
         this.onContactListener = monContactListener;
+        this.context = context;
     }
 
     //constructor
@@ -37,15 +51,33 @@ public class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecycl
     }
 
 
+
     @Override
     public void onBindViewHolder(@NonNull ContactsRecyclerAdapter.ViewHolder viewHolder, int position) {
 
         viewHolder.title.setText(mContacts.get(position).getTitle());
         viewHolder.name.setText(mContacts.get(position).getName());
         viewHolder.surname.setText(mContacts.get(position).getSurname());
-        viewHolder.profilePhoto.setImageResource(mContacts.get(position).getPhoto());
 
-        //horrible and wrong practice to attack clicklistener here - not good performance at all
+
+       // imageProfile.findViewById(R.id.iv_profilePhoto);
+
+        /*Blurry.with(context)
+                .radius(10)
+                .animate(500)
+
+                .capture(viewHolder.profilePhoto)
+                .into(imageProfile);*/
+
+        //issue with context and glide
+
+        /*Glide.with(context).load(imageUrl)
+                .centerCrop()
+                .into(R.id.iv_profilePhoto);
+
+        Log.d("url", "url check");*/
+
+        //horrible and wrong practice to attach clicklistener here - not good performance at all
 
     }
 

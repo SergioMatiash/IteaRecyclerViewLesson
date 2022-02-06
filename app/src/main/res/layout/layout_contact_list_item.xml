@@ -4,15 +4,16 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/cl_item_main"
-    android:background="#E64E82"
-    app:cardCornerRadius="4dp"
-    app:cardBackgroundColor="#172885"
-    android:paddingLeft="10dp"
+
     android:layout_width="match_parent"
     android:layout_height="wrap_content">
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/cl_inner"
+
+
+
+
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -23,8 +24,12 @@
             android:layout_height="21dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="16dp"
-            android:background="@color/purple_200"
+
             android:text="@string/title"
+
+
+
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
@@ -34,8 +39,9 @@
             android:layout_height="21dp"
             android:layout_marginStart="32dp"
             android:layout_marginTop="8dp"
-            android:background="@color/purple_200"
+
             android:text="@string/name"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_title" />
 
@@ -44,13 +50,15 @@
             android:layout_width="125dp"
             android:layout_height="25dp"
             android:layout_marginStart="32dp"
-            android:layout_marginTop="16dp"
-            android:background="@color/purple_200"
+            android:layout_marginTop="8dp"
+
             android:text="@string/surname"
+
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/tv_name" />
 
         <ImageView
+
             android:id="@+id/iv_profilePhoto"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
