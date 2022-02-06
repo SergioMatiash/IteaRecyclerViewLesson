@@ -1,15 +1,17 @@
 package com.example.itearecyclerviewlesson.adapters;
 
+import android.widget.ImageView;
+
 import com.github.javafaker.Faker;
 
 public class Contact {
     private String name;
     private String surname;
     private String title;
-    private int photo;
+    private String photo;
 
 
-    public Contact(String name, String surname, String title,int photo) {
+    public Contact(String name, String surname, String title,String photo) {
 
         this.name=name;
         this.surname = surname;
@@ -35,7 +37,7 @@ public class Contact {
 
 
 
-    public int getPhoto() {
+    public String getPhoto() {
         return photo;
     }
 

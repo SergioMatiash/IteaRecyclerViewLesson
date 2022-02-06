@@ -43,7 +43,7 @@ public class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecycl
         viewHolder.title.setText(mContacts.get(position).getTitle());
         viewHolder.name.setText(mContacts.get(position).getName());
         viewHolder.surname.setText(mContacts.get(position).getSurname());
-        viewHolder.profilePhoto.setImageResource(mContacts.get(position).getPhoto());
+
 
         //horrible and wrong practice to attack clicklistener here - not good performance at all
 
