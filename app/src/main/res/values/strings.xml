@@ -6,4 +6,9 @@
     <string name="title">Title</string>
     <string name="action_settings">action settings</string>
 
+    <string name="settings">Settings</string>
+    <string name="share">Share</string>
+    <string name="content_description_settings">System settings</string>
+    <string name="content_description_more">Share you contacts</string>
+
 </resources>

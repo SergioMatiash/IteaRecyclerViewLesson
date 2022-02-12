@@ -1,4 +1,4 @@
-package com.example.itearecyclerviewlesson.adapters;
+package com.example.itearecyclerviewlesson.model;
 
 import android.widget.ImageView;
 

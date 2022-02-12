@@ -14,10 +14,9 @@ import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-import android.widget.Toolbar;
 
 import com.example.itearecyclerviewlesson.R;
-import com.example.itearecyclerviewlesson.adapters.Contact;
+import com.example.itearecyclerviewlesson.model.Contact;
 import com.example.itearecyclerviewlesson.adapters.ContactsRecyclerAdapter;
 import com.github.javafaker.Faker;
 import com.google.android.material.appbar.AppBarLayout;
@@ -51,28 +50,11 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        //adding collapsing toolbar behavior
 
 
-        AppBarLayout mAppBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
-        mAppBarLayout.addOnOffsetChangedListener(new AppBarLayout.OnOffsetChangedListener() {
-            boolean isShow = false;
-            int scrollRange = -1;
 
-            @Override
-            public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
-                if (scrollRange == -1) {
-                    scrollRange = appBarLayout.getTotalScrollRange();
-                }
-                if (scrollRange + verticalOffset == 0) {
-                    isShow = true;
-                    showOption(R.id.action_info);
-                } else if (isShow) {
-                    isShow = false;
-                    hideOption(R.id.action_info);
-                }
-            }
-        });
+
+
 
         mRecyclerView = findViewById(R.id.recyclerView);
 
