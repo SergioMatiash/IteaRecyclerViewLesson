@@ -9,14 +9,16 @@ public class Contact {
     private String surname;
     private String title;
     private String photo;
+    private int position;
 
 
-    public Contact(String name, String surname, String title,String photo) {
+    public Contact(String name, String surname, String title,String photo, int position) {
 
         this.name=name;
         this.surname = surname;
         this.title = title;
         this.photo=photo;
+        this.position = position;
     }
 
     public String getName() {
@@ -41,5 +43,7 @@ public class Contact {
         return photo;
     }
 
-
+    public int getPosition() {
+        return position;
+    }
 }

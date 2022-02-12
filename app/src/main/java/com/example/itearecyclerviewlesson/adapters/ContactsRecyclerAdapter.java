@@ -3,6 +3,7 @@ package com.example.itearecyclerviewlesson.adapters;
 
 
 import android.content.Context;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -11,6 +12,7 @@ import android.widget.TextView;
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.bumptech.glide.Glide;
 import com.example.itearecyclerviewlesson.R;
 import com.example.itearecyclerviewlesson.model.Contact;
 
@@ -54,27 +56,18 @@ public class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecycl
     @Override
     public void onBindViewHolder(@NonNull ContactsRecyclerAdapter.ViewHolder viewHolder, int position) {
 
-        viewHolder.title.setText(mContacts.get(position).getTitle());
-        viewHolder.name.setText(mContacts.get(position).getName());
-        viewHolder.surname.setText(mContacts.get(position).getSurname());
+        Contact contact = mContacts.get(position);
+        viewHolder.title.setText(contact.getTitle());
+        viewHolder.name.setText(contact.getName());
+        viewHolder.surname.setText(contact.getSurname());
 
+        context = viewHolder.itemView.getContext();
 
-       // imageProfile.findViewById(R.id.iv_profilePhoto);
-
-        /*Blurry.with(context)
-                .radius(10)
-                .animate(500)
-
-                .capture(viewHolder.profilePhoto)
-                .into(imageProfile);*/
-
-        //issue with context and glide
-
-        /*Glide.with(context).load(imageUrl)
+        Glide.with(context).load(imageUrl)
                 .centerCrop()
-                .into(R.id.iv_profilePhoto);
+                .into(viewHolder.profilePhoto);
 
-        Log.d("url", "url check");*/
+        Log.d("url", "url check");
 
         //horrible and wrong practice to attach clicklistener here - not good performance at all
 

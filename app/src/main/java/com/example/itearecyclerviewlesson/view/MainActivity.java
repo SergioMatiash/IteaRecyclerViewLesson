@@ -122,7 +122,7 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
 
 
 
-        mContacts.add(position,new Contact(fakeName,fakeSurname,"Contact # "+position, imageUrl));
+        mContacts.add(position,new Contact(fakeName,fakeSurname,"Contact # "+position, imageUrl,position));
     }
 
     //creating contacts
@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
 
 
            imageProfile = findViewById(R.id.iv_profilePhoto);
-            Contact contact = new Contact(fakeName,fakeSurname,"Contact # "+i, imageUrl);
+            Contact contact = new Contact(fakeName,fakeSurname,"Contact # "+i, imageUrl,i);
 
 
 
@@ -179,7 +179,7 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
                    mContacts.remove(position);
                    mContactsRecyclerAdapter.notifyItemRemoved(position);
 
-                   Snackbar.make(mRecyclerView, Integer.parseInt(deletedContact.toString()),Snackbar.LENGTH_LONG)
+                   Snackbar.make(mRecyclerView, deletedContact.toString(),Snackbar.LENGTH_LONG)
                            .setAction("Undo", new View.OnClickListener() {
                                @Override
                                public void onClick(View v) {
