@@ -46,4 +46,26 @@ public class Contact {
     public int getPosition() {
         return position;
     }
+
+    public void setName(String name) {
+        this.name = name;
+    }
+
+
+
+    public void setSurname(String surname) {
+        this.surname = surname;
+    }
+
+    public void setTitle(String title) {
+        this.title = title;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
+    }
+
+    public void setPosition(int position) {
+        this.position = position;
+    }
 }

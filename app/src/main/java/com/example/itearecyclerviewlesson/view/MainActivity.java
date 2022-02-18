@@ -1,25 +1,37 @@
 package com.example.itearecyclerviewlesson.view;
 
-import static android.content.ContentValues.TAG;
+
+import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
+import static androidx.core.content.PackageManagerCompat.LOG_TAG;
+
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 import androidx.recyclerview.widget.ItemTouchHelper;
 import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
+import android.Manifest;
 import android.content.Context;
+import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.os.Parcel;
+import android.os.Parcelable;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.ImageView;
-
 import com.example.itearecyclerviewlesson.R;
 import com.example.itearecyclerviewlesson.model.Contact;
 import com.example.itearecyclerviewlesson.adapters.ContactsRecyclerAdapter;
+import com.example.itearecyclerviewlesson.parsingbetween.ObjectToBeParsed;
+import com.example.itearecyclerviewlesson.retrofitmodule.ApiData;
+import com.example.itearecyclerviewlesson.retrofitmodule.RetrofitController;
 import com.github.javafaker.Faker;
-import com.google.android.material.appbar.AppBarLayout;
+import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
 
@@ -30,20 +42,30 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
 
     private static final int NUMBER_OF_CONTACTS = 100;
 
+
     // ui components
     private RecyclerView mRecyclerView;
 
     //adapters & variables
     private ArrayList<Contact> mContacts = new ArrayList<>();
+    private ArrayList<ApiData> avatars = new ArrayList<>();
     private ContactsRecyclerAdapter mContactsRecyclerAdapter;
     public String imageUrl = "https://cdn.pixabay.com/photo/2017/09/01/00/15/png-2702691_960_720.png";
     public ImageView imageProfile;
     private Menu menu;
     private ActionBar toolbar;
+    private FloatingActionButton addNewItem;
 
     public Context context;
 
     Faker faker = new Faker();
+
+
+    protected MainActivity(Parcel in) {
+        imageUrl = in.readString();
+    }
+
+    //packing objects into parcel
 
 
     @Override
@@ -51,8 +73,15 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        //calling retrofit for downloading images from apicat
 
 
+        if (ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.WRITE_EXTERNAL_STORAGE)!= PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(MainActivity.this,new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},NUMBER_OF_CONTACTS);
+        }
+
+        RetrofitController retrofitController = new RetrofitController();
+        retrofitController.start();
 
 
 
@@ -67,6 +96,12 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
 
         initRecyclerView ();
         insertStandardContacts();
+
+
+        //initialize transmission to the new activity
+       //addNewItem = findViewById(R.id.btn_add_new_item);
+
+
     }
 
 
@@ -197,14 +232,25 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
     };
 
 
-
-
-    //method for contact click - yet to be implemented --- passage to separate activity
     @Override
-    public void onContactClick(int position) {
+    public void onLongContactClick(int position) {
 
-        Log.d(TAG, "onContactClick: clicked. ");
-        //Intent intent = new Intent(this, ContactItem.java);
-        //startActivity(intent);
+        String fakeName = faker.name().firstName();
+        String fakeSurname = faker.name().lastName();
+
+        Contact contact = new Contact(fakeName,fakeSurname,"Contect #"+position,imageUrl,position);
+        Intent intent = new Intent(this, NewContactActivity.class);
+        //need to be parsed?
+        intent.putExtra(ObjectToBeParsed.class.getCanonicalName(), (Parcelable) contact);
+
+        startActivity(intent);
+    }
+
+
+
+
+    @Override
+    public void onPointerCaptureChanged(boolean hasCapture) {
+
     }
 }

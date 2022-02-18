@@ -11,4 +11,7 @@
     <string name="content_description_settings">System settings</string>
     <string name="content_description_more">Share you contacts</string>
 
+    <string name="button_save">Save</string>
+    <string name="button_back">Bck</string>
+
 </resources>

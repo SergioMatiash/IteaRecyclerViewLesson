@@ -56,10 +56,14 @@ public class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecycl
     @Override
     public void onBindViewHolder(@NonNull ContactsRecyclerAdapter.ViewHolder viewHolder, int position) {
 
-        Contact contact = mContacts.get(position);
+        viewHolder.bindTo(mContacts.get(position));
+
+        /*Contact contact = mContacts.get(position);
+
         viewHolder.title.setText(contact.getTitle());
         viewHolder.name.setText(contact.getName());
-        viewHolder.surname.setText(contact.getSurname());
+        viewHolder.surname.setText(contact.getSurname());*/
+
 
         context = viewHolder.itemView.getContext();
 
@@ -68,6 +72,8 @@ public class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecycl
                 .into(viewHolder.profilePhoto);
 
         Log.d("url", "url check");
+
+
 
         //horrible and wrong practice to attach clicklistener here - not good performance at all
 
@@ -87,6 +93,7 @@ public class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecycl
         ImageView profilePhoto;
 
         public ViewHolder(@NonNull View itemView, OnContactListener onContactListener) {
+
             super(itemView);
             title = itemView.findViewById(R.id.tv_title);
             name = itemView.findViewById(R.id.tv_name);
@@ -105,16 +112,30 @@ public class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecycl
         @Override
         public void onClick(View v) {
 
-            onContactListener.onContactClick(getAdapterPosition());
+            onContactListener.onLongContactClick(getAdapterPosition());
         }
 
+        //3rd attempt to make view holder happy
+        public void bindTo (Contact contact) {
+
+         title.setText(contact.getTitle());
+         name.setText(contact.getName());
+         surname.setText(contact.getSurname());
+
+        // contact doesnt have context thus its hard to attach glide and photo
+        }
 
 
     }
 
+
+
+
+
+
     //interface for detecting and interpret the click
     public interface OnContactListener {
-        void onContactClick (int position);
+        void onLongContactClick (int position);
     }
 
 }

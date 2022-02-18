@@ -51,7 +51,7 @@
 
 
     <com.google.android.material.bottomappbar.BottomAppBar
-        android:id="@+id/bottomAppBar"
+        android:id="@+id/btn_add_new_item"
         style="@style/Widget.MaterialComponents.BottomAppBar.Colored"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -61,9 +61,10 @@
         />
 
     <com.google.android.material.floatingactionbutton.FloatingActionButton
+
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        app:layout_anchor="@id/bottomAppBar"
+        app:layout_anchor="@id/btn_add_new_item"
 
       />
 
