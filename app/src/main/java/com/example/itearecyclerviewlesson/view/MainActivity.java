@@ -54,6 +54,7 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
     private FloatingActionButton addNewItem;
 
     public Context context;
+    public Parcel in;
 
     Faker faker = new Faker();
 
@@ -238,8 +239,10 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
         //need to be parsed?
 
         //we need to "teach to understand" parcel to deconstruct Contact
-        intent.putExtra(ObjectToBeParsed.class.getCanonicalName(), contact.getName());
-        intent.putExtra(ObjectToBeParsed.class.getCanonicalName(), contact.getSurname());
+        //and here we need to "pack" not contact itself but object inside which we are inserting our strings
+        ObjectToBeParsed objectToBeParsed = new ObjectToBeParsed(in, position);
+        intent.putExtra(ObjectToBeParsed.class.getCanonicalName(), objectToBeParsed);
+        intent.putExtra(ObjectToBeParsed.class.getCanonicalName(), objectToBeParsed);
 
 
         startActivity(intent);

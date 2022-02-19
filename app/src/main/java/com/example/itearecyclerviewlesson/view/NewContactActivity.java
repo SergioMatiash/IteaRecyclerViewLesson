@@ -26,8 +26,8 @@ public class NewContactActivity extends AppCompatActivity {
         ObjectToBeParsed objectToBeParsed = (ObjectToBeParsed) getIntent().getParcelableExtra(ObjectToBeParsed.class.getCanonicalName());
 
 
-        name.setText(objectToBeParsed.pName);
-        surname.setText(objectToBeParsed.pSurname);
+        name.setText(String.valueOf(objectToBeParsed.pName));
+        surname.setText(String.valueOf(objectToBeParsed.pSurname));
 
 
     }
