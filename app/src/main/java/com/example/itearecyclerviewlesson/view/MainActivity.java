@@ -1,9 +1,6 @@
 package com.example.itearecyclerviewlesson.view;
 
 
-import static androidx.constraintlayout.helper.widget.MotionEffect.TAG;
-import static androidx.core.content.PackageManagerCompat.LOG_TAG;
-
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
@@ -61,15 +58,13 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
     Faker faker = new Faker();
 
 
-    protected MainActivity(Parcel in) {
-        imageUrl = in.readString();
-    }
+
 
     //packing objects into parcel
 
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
@@ -241,7 +236,11 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
         Contact contact = new Contact(fakeName,fakeSurname,"Contect #"+position,imageUrl,position);
         Intent intent = new Intent(this, NewContactActivity.class);
         //need to be parsed?
-        intent.putExtra(ObjectToBeParsed.class.getCanonicalName(), (Parcelable) contact);
+
+        //we need to "teach to understand" parcel to deconstruct Contact
+        intent.putExtra(ObjectToBeParsed.class.getCanonicalName(), contact.getName());
+        intent.putExtra(ObjectToBeParsed.class.getCanonicalName(), contact.getSurname());
+
 
         startActivity(intent);
     }

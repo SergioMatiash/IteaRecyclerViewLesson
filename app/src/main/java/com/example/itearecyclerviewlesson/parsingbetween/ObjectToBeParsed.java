@@ -4,27 +4,38 @@ import android.os.Parcel;
 import android.os.Parcelable;
 import android.util.Log;
 
+import com.example.itearecyclerviewlesson.model.Contact;
+import com.github.javafaker.Faker;
+
 public class ObjectToBeParsed implements Parcelable {
 
     final static String LOG_TAG = "parcelTag";
+    public String imageUrl = "https://cdn.pixabay.com/photo/2017/09/01/00/15/png-2702691_960_720.png";
 
     public String pName;
     public String pSurname;
 
-   //constructor which reads
-    protected ObjectToBeParsed(Parcel in) {
+    Faker faker = new Faker();
 
+   //constructor which reads
+    public ObjectToBeParsed(Parcel in,int position) {
+
+        Contact contact = new Contact(faker.name().firstName(),faker.name().lastName(),"Contact # "+position,imageUrl,position);
         Log.d(LOG_TAG, "MyObject(Parcel parcel)");
-        pName = in.readString();
-        pSurname = in.readString();
+        pName = contact.getName();
+        pSurname = contact.getSurname();
     }
 
     public static final Creator<ObjectToBeParsed> CREATOR = new Creator<ObjectToBeParsed>() {
 
         //unpacking parcel
+
+
         @Override
-        public ObjectToBeParsed createFromParcel(Parcel in) {
-            return new ObjectToBeParsed(in);
+        public ObjectToBeParsed createFromParcel(Parcel source) {
+
+            //need to return new onject
+            return new ObjectToBeParsed(source, source.dataPosition());
         }
 
         @Override
@@ -46,9 +57,11 @@ public class ObjectToBeParsed implements Parcelable {
         return 0;
     }
 
-    //packing into parsel
+    //packing into parcel
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+
+
         Log.d(LOG_TAG, "writeToParcel");
         dest.writeString(pName);
         dest.writeString(pSurname);

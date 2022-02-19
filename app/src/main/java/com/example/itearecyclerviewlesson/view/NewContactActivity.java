@@ -11,14 +11,24 @@ import com.example.itearecyclerviewlesson.parsingbetween.ObjectToBeParsed;
 
 public class NewContactActivity extends AppCompatActivity {
 
-    TextView name;
+    TextView name,surname;
+
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_new_contact);
 
+        name = findViewById(R.id.et_add_name);
+        surname = findViewById(R.id.et_add_surname);
+
         ObjectToBeParsed objectToBeParsed = (ObjectToBeParsed) getIntent().getParcelableExtra(ObjectToBeParsed.class.getCanonicalName());
+
+
+        name.setText(objectToBeParsed.pName);
+        surname.setText(objectToBeParsed.pSurname);
+
 
     }
 }
