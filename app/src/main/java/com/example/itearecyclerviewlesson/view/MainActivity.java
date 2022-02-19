@@ -15,8 +15,6 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.os.Parcel;
-import android.os.Parcelable;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
@@ -26,13 +24,12 @@ import com.example.itearecyclerviewlesson.model.Contact;
 import com.example.itearecyclerviewlesson.adapters.ContactsRecyclerAdapter;
 import com.example.itearecyclerviewlesson.parsingbetween.ObjectToBeParsed;
 import com.example.itearecyclerviewlesson.retrofitmodule.ApiData;
-import com.example.itearecyclerviewlesson.retrofitmodule.RetrofitController;
+import com.example.itearecyclerviewlesson.retrofitmodule.ProfilePhoto;
 import com.github.javafaker.Faker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
-
-
+import java.util.List;
 
 
 public class MainActivity extends AppCompatActivity implements ContactsRecyclerAdapter.OnContactListener {
@@ -45,7 +42,7 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
 
     //adapters & variables
     private ArrayList<Contact> mContacts = new ArrayList<>();
-    private ArrayList<ApiData> avatars = new ArrayList<>();
+    private List<ProfilePhoto> avatars = new ArrayList<>();
     private ContactsRecyclerAdapter mContactsRecyclerAdapter;
     public String imageUrl = "https://cdn.pixabay.com/photo/2017/09/01/00/15/png-2702691_960_720.png";
     public ImageView imageProfile;
@@ -76,8 +73,6 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
             ActivityCompat.requestPermissions(MainActivity.this,new String[] {Manifest.permission.WRITE_EXTERNAL_STORAGE},NUMBER_OF_CONTACTS);
         }
 
-        RetrofitController retrofitController = new RetrofitController();
-        retrofitController.start();
 
 
 
@@ -182,7 +177,7 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
         mRecyclerView.setLayoutManager(linearLayoutManager);
         VerticalSpacingItemDecorator itemDecorator = new VerticalSpacingItemDecorator(10);
         mRecyclerView.addItemDecoration(itemDecorator);
-        mContactsRecyclerAdapter = new ContactsRecyclerAdapter(mContacts,this, context );
+        mContactsRecyclerAdapter = new ContactsRecyclerAdapter(mContacts,this, context ,avatars);
         mRecyclerView.setAdapter(mContactsRecyclerAdapter);
 
 

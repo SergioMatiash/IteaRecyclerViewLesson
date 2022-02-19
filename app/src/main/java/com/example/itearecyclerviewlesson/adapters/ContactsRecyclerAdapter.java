@@ -15,16 +15,19 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.bumptech.glide.Glide;
 import com.example.itearecyclerviewlesson.R;
 import com.example.itearecyclerviewlesson.model.Contact;
+import com.example.itearecyclerviewlesson.retrofitmodule.ProfilePhoto;
+import com.example.itearecyclerviewlesson.retrofitmodule.RetrofitDownloadController;
 
 import java.util.ArrayList;
+import java.util.List;
 
 
 public class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecyclerAdapter.ViewHolder> {
 
     private ArrayList<Contact> mContacts;
     private OnContactListener onContactListener;
+    private List<ProfilePhoto> profilePhotos;
 
-    private ImageView imageProfile;
     public Context context;
 
 
@@ -32,13 +35,18 @@ public class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecycl
     private String imageUrl = "https://cdn.pixabay.com/photo/2017/09/01/00/15/png-2702691_960_720.png";
 
 
-    public ContactsRecyclerAdapter(ArrayList<Contact> mContacts, OnContactListener monContactListener, Context context) {
+    public ContactsRecyclerAdapter(ArrayList<Contact> mContacts, OnContactListener monContactListener, Context context, List<ProfilePhoto> profilePhotos) {
         this.mContacts = mContacts;
         this.onContactListener = monContactListener;
         this.context = context;
+        this.profilePhotos=profilePhotos;
     }
 
-    //constructor
+    public void setPhotoChangedAdapter(List<ProfilePhoto> profilePhotos) {
+        this.profilePhotos=profilePhotos;
+        //check if there is more effective method, cause using notifydatasetchanged is so costly
+        notifyDataSetChanged();
+    }
 
 
 
@@ -67,11 +75,12 @@ public class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecycl
 
         context = viewHolder.itemView.getContext();
 
-        Glide.with(context).load(imageUrl)
+        /*Glide.with(context).load(profilePhotos.get(position).getProfilePhotoUrl())
                 .centerCrop()
                 .into(viewHolder.profilePhoto);
 
-        Log.d("url", "url check");
+        Log.d("url", "url check");*/
+
 
 
 
