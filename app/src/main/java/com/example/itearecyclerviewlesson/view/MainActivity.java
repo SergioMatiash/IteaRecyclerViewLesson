@@ -24,7 +24,9 @@ import com.example.itearecyclerviewlesson.model.Contact;
 import com.example.itearecyclerviewlesson.adapters.ContactsRecyclerAdapter;
 import com.example.itearecyclerviewlesson.parsingbetween.ObjectToBeParsed;
 import com.example.itearecyclerviewlesson.retrofitmodule.ApiData;
+import com.example.itearecyclerviewlesson.retrofitmodule.OnPhotoDownloadedListener;
 import com.example.itearecyclerviewlesson.retrofitmodule.ProfilePhoto;
+import com.example.itearecyclerviewlesson.retrofitmodule.RetrofitDownloadController;
 import com.github.javafaker.Faker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
@@ -32,7 +34,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 
-public class MainActivity extends AppCompatActivity implements ContactsRecyclerAdapter.OnContactListener {
+public class MainActivity extends AppCompatActivity implements ContactsRecyclerAdapter.OnContactListener, OnPhotoDownloadedListener {
 
     private static final int NUMBER_OF_CONTACTS = 100;
 
@@ -87,6 +89,10 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
 
         initRecyclerView ();
         insertStandardContacts();
+        RetrofitDownloadController retrofitDownloadController = new RetrofitDownloadController();
+        //dont know if its right solution
+
+
 
 
         //initialize transmission to the new activity
@@ -183,6 +189,7 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
 
     }
 
+
     // deleting item through swipe and turn back - possibility
     Contact deletedContact = null;
 
@@ -248,6 +255,16 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
 
     @Override
     public void onPointerCaptureChanged(boolean hasCapture) {
+
+    }
+
+    @Override
+    public void onPhotoDownloadedCallBack(List<String> urldownload, int position) {
+
+        String fakeName = faker.name().firstName();
+        String fakeSurname = faker.name().lastName();
+        Contact contact = new Contact(fakeName,fakeSurname,"Contect #"+position,imageUrl,position);
+        contact.setPhoto(urldownload.toString());
 
     }
 }

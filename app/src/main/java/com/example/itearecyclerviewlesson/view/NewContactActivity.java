@@ -4,6 +4,8 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
 
 import com.example.itearecyclerviewlesson.R;
@@ -13,6 +15,7 @@ public class NewContactActivity extends AppCompatActivity {
 
     TextView name,surname;
 
+    Button goToEmail;
 
 
     @Override
@@ -28,6 +31,18 @@ public class NewContactActivity extends AppCompatActivity {
 
         name.setText(String.valueOf(objectToBeParsed.pName));
         surname.setText(String.valueOf(objectToBeParsed.pSurname));
+
+        goToEmail.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(Intent.ACTION_SEND);
+                intent.putExtra(Intent.EXTRA_EMAIL, new String[]{"mail@mail.com"});
+                intent.putExtra(Intent.EXTRA_SUBJECT, "email subject"); // optional
+                intent.setType("message/rfc822"); // useful define which kind of app to perform the action
+                startActivity(Intent.createChooser(intent, "Send Email"));
+            }
+        });
+
 
 
     }

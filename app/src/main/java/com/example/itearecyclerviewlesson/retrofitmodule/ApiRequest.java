@@ -2,7 +2,6 @@ package com.example.itearecyclerviewlesson.retrofitmodule;
 
 
 import java.util.List;
-
 import retrofit2.Call;
 import retrofit2.http.GET;
 
@@ -13,7 +12,7 @@ public interface ApiRequest {
 
 
     @GET("/v1/images/search")
-    Call<List<ApiData>> getContactPhoto();
+    Call<List<ProfilePhoto>> getContactPhoto();
 
     //here we need to call data that we expect to get
 }
