@@ -76,7 +76,7 @@ public class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecycl
 
         context = viewHolder.itemView.getContext();
 
-        Glide.with(context).load(imageUrls.get(position))
+        Glide.with(context).load(profilePhotos.get(position).getProfilePhotoUrl())
                 .centerCrop()
                 .into(viewHolder.profilePhoto);
 
