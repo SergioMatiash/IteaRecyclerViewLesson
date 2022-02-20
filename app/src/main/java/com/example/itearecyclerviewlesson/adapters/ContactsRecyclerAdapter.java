@@ -27,6 +27,7 @@ public class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecycl
     private ArrayList<Contact> mContacts;
     private OnContactListener onContactListener;
     private List<ProfilePhoto> profilePhotos;
+    private ArrayList<String> imageUrls;
 
     public Context context;
 
@@ -75,11 +76,11 @@ public class ContactsRecyclerAdapter extends RecyclerView.Adapter<ContactsRecycl
 
         context = viewHolder.itemView.getContext();
 
-        /*Glide.with(context).load(profilePhotos.get(position).getProfilePhotoUrl())
+        Glide.with(context).load(imageUrls.get(position))
                 .centerCrop()
                 .into(viewHolder.profilePhoto);
 
-        Log.d("url", "url check");*/
+        Log.d("url", "url check");
 
 
 

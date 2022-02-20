@@ -23,14 +23,13 @@ import com.example.itearecyclerviewlesson.R;
 import com.example.itearecyclerviewlesson.model.Contact;
 import com.example.itearecyclerviewlesson.adapters.ContactsRecyclerAdapter;
 import com.example.itearecyclerviewlesson.parsingbetween.ObjectToBeParsed;
-import com.example.itearecyclerviewlesson.retrofitmodule.ApiData;
 import com.example.itearecyclerviewlesson.retrofitmodule.OnPhotoDownloadedListener;
 import com.example.itearecyclerviewlesson.retrofitmodule.ProfilePhoto;
-import com.example.itearecyclerviewlesson.retrofitmodule.RetrofitDownloadController;
 import com.github.javafaker.Faker;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 
@@ -46,7 +45,16 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
     private ArrayList<Contact> mContacts = new ArrayList<>();
     private List<ProfilePhoto> avatars = new ArrayList<>();
     private ContactsRecyclerAdapter mContactsRecyclerAdapter;
-    public String imageUrl = "https://cdn.pixabay.com/photo/2017/09/01/00/15/png-2702691_960_720.png";
+    public String imageUrl1 = "https://cdn.pixabay.com/photo/2017/09/01/00/15/png-2702691_960_720.png";
+    public String imageUrl2 = "https://toppng.com/uploads/preview/cat-11525956124t37pf0dhfz.png";
+    public String imageUrl3 = "https://www.pngitem.com/pimgs/m/124-1241673_transparent-cats-png-.png";
+    public String imageUrl4 = "https://thumbs.dreamstime.com/b/pretty-young-tabby-cat-closeup-isolated-white-portrait-background-facing-looking-forward-138057658.jpg";
+    public String imageUrl5 = "https://png.pngtree.com/png-vector/20201229/ourmid/pngtree-cute-pet-little-wild-cat-png-image_2659017.jpg";
+
+
+    public ArrayList<String> imgUrls = new ArrayList<>(Collections.nCopies(NUMBER_OF_CONTACTS,imageUrl1));
+
+
     public ImageView imageProfile;
     private Menu menu;
     private ActionBar toolbar;
@@ -67,6 +75,13 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        imgUrls.add(imageUrl1);
+        imgUrls.add(imageUrl2);
+        imgUrls.add(imageUrl3);
+        imgUrls.add(imageUrl4);
+        imgUrls.add(imageUrl5);
+
+
 
         //calling retrofit for downloading images from apicat
 
@@ -89,7 +104,7 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
 
         initRecyclerView ();
         insertStandardContacts();
-        RetrofitDownloadController retrofitDownloadController = new RetrofitDownloadController();
+        //RetrofitDownloadController retrofitDownloadController = new RetrofitDownloadController();
         //dont know if its right solution
 
 
@@ -97,6 +112,9 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
 
         //initialize transmission to the new activity
        //addNewItem = findViewById(R.id.btn_add_new_item);
+
+
+
 
 
     }
@@ -154,25 +172,22 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
 
 
 
-        mContacts.add(position,new Contact(fakeName,fakeSurname,"Contact # "+position, imageUrl,position));
+        mContacts.add(position,new Contact(fakeName,fakeSurname,"Contact # "+position, imageUrl1,position));
     }
 
     //creating contacts
     private void insertStandardContacts() {
         for (int i = 0; i <NUMBER_OF_CONTACTS ; i++) {
-
-            String fakeName = faker.name().firstName();
-            String fakeSurname = faker.name().lastName();
-
-
-
-           imageProfile = findViewById(R.id.iv_profilePhoto);
-            Contact contact = new Contact(fakeName,fakeSurname,"Contact # "+i, imageUrl,i);
-
+            for (String j:imgUrls) {
+                String fakeName = faker.name().firstName();
+                String fakeSurname = faker.name().lastName();
+                imageProfile = findViewById(R.id.iv_profilePhoto);
+                Contact contact = new Contact(fakeName,fakeSurname,"Contact # "+i, j,i);
+                mContacts.add(contact);
+            }
 
 
-            
-            mContacts.add(contact);
+
         }
         mContactsRecyclerAdapter.notifyDataSetChanged();
     }
@@ -236,7 +251,7 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
         String fakeName = faker.name().firstName();
         String fakeSurname = faker.name().lastName();
 
-        Contact contact = new Contact(fakeName,fakeSurname,"Contect #"+position,imageUrl,position);
+        Contact contact = new Contact(fakeName,fakeSurname,"Contect #"+position,imageUrl1,position);
         Intent intent = new Intent(this, NewContactActivity.class);
         //need to be parsed?
 
@@ -258,12 +273,13 @@ public class MainActivity extends AppCompatActivity implements ContactsRecyclerA
 
     }
 
+    //used for photo with retrofit
     @Override
     public void onPhotoDownloadedCallBack(List<String> urldownload, int position) {
 
         String fakeName = faker.name().firstName();
         String fakeSurname = faker.name().lastName();
-        Contact contact = new Contact(fakeName,fakeSurname,"Contect #"+position,imageUrl,position);
+        Contact contact = new Contact(fakeName,fakeSurname,"Contect #"+position,imageUrl1,position);
         contact.setPhoto(urldownload.toString());
 
     }

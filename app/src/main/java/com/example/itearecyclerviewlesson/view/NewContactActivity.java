@@ -32,7 +32,7 @@ public class NewContactActivity extends AppCompatActivity {
         name.setText(String.valueOf(objectToBeParsed.pName));
         surname.setText(String.valueOf(objectToBeParsed.pSurname));
 
-        goToEmail.setOnClickListener(new View.OnClickListener() {
+       /* goToEmail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Intent.ACTION_SEND);
@@ -41,7 +41,7 @@ public class NewContactActivity extends AppCompatActivity {
                 intent.setType("message/rfc822"); // useful define which kind of app to perform the action
                 startActivity(Intent.createChooser(intent, "Send Email"));
             }
-        });
+        });*/
 
 
 

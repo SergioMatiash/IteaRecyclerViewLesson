@@ -12,7 +12,8 @@ public interface ApiRequest {
 
 
     @GET("/v1/images/search")
-    Call<List<ProfilePhoto>> getContactPhoto();
+    Call<List<ApiData>> getContactPhoto();
 
+    //depending on api of site
     //here we need to call data that we expect to get
 }
